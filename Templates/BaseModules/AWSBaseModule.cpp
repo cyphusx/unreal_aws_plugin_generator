@@ -58,7 +58,7 @@ void FAWSBaseModule::ShutdownModule(){
 
 bool FAWSBaseModule::LoadDll(const FString path, void*& dll_ptr, const FString name) {
     //load the passed in dll and if it successeds then add it to the valid set
-    UE_LOG(LogTemp, Error, TEXT("Attempting to load DLL %s from %s"), *name, *path);
+    UE_LOG(LogTemp, Display, TEXT("Attempting to load DLL %s from %s"), *name, *path);
     dll_ptr = FPlatformProcess::GetDllHandle(*path);
 
     if (dll_ptr == nullptr) {
@@ -82,9 +82,9 @@ void FAWSBaseModule::FreeDll(void*& dll_ptr) {
 void FAWSBaseModule::FreeAllDll() {
     //Free all the current valid dll's
     for (auto dll : FAWSBaseModule::ValidDllHandles) {
-        FAWSBaseModule::ValidDllHandles.Remove(dll);
         FAWSBaseModule::FreeDll(dll);
     }
+      FAWSBaseModule::ValidDllHandles.Empty();
 }
 
 

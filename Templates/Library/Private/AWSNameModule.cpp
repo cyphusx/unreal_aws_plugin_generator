@@ -36,7 +36,7 @@ void F{{client_context['client-module-name']}}Module::ShutdownModule(){
 
 bool F{{client_context['client-module-name']}}Module::LoadDll(const FString path, void*& dll_ptr, const FString name) {
     //load the passed in dll and if it successeds then add it to the valid set
-    UE_LOG(LogTemp, Error, TEXT("Attempting to load DLL %s from %s"), *name, *path);
+    UE_LOG(LogTemp, Display, TEXT("Attempting to load DLL %s from %s"), *name, *path);
     dll_ptr = FPlatformProcess::GetDllHandle(*path);
 
     if (dll_ptr == nullptr) {
@@ -60,9 +60,9 @@ void F{{client_context['client-module-name']}}Module::FreeDll(void*& dll_ptr) {
 void F{{client_context['client-module-name']}}Module::FreeAllDll() {
     //Free all the current valid dll's
     for (auto dll : F{{client_context['client-module-name']}}Module::ValidDllHandles) {
-        F{{client_context['client-module-name']}}Module::ValidDllHandles.Remove(dll);
         F{{client_context['client-module-name']}}Module::FreeDll(dll);
     }
+    F{{client_context['client-module-name']}}Module::ValidDllHandles.Empty();
 }
 
 
