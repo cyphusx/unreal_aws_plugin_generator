@@ -17,7 +17,10 @@ struct FClientConfiguration {
         useDualStack(false),
         maxConnections(25),
         requestTimeoutMs(3000),
-        connectionTimeoutMs(1000)
+        connectionTimeoutMs(1000),
+        proxyPort(0),
+        verifySSL(false),
+        followRedirects(false)
     {}
 public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AWS Client Configuration")
