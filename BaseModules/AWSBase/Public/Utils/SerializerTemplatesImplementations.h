@@ -137,7 +137,7 @@ template <typename T>
 Aws::Vector<T> AWSSerializer::TSettoAwsVector(TSet<T> in_set) {
 	Aws::Vector<T> out_vector = Aws::Vector<T>();
 
-	for (auto elem : in_array) {
+	for (auto elem : in_set) {
 		out_vector.push_back(elem);
 	}
 }

@@ -123,7 +123,7 @@ def genetateTPTemplates(context):
     plugin_source_path = os.path.join(plugin_path, "Source")
 
     #jinja env
-    env = Environment(loader=FileSystemLoader('templates'))
+    env = Environment(loader=FileSystemLoader('./Templates'))
 
     #for each client module look at the needed tp dependencies
     for clientmodule in context['client-modules']:
@@ -136,7 +136,7 @@ def genetateTPTemplates(context):
                 if os.path.isfile(template_dst):
                     print(f"We have already made the generate files for the {tpmodule['TPModuleName']}")
                     break
-                
+
                 jinja_temp = env.get_template(template['name'])
                 output = jinja_temp.render(context=tpmodule)
                 print(template['msg'](tpmodule))
@@ -158,7 +158,7 @@ def generateClientTemplates(context):
     plugin_source_path = os.path.join(plugin_path, "Source")
 
     #jinja env
-    env = Environment(loader=FileSystemLoader('templates'))
+    env = Environment(loader=FileSystemLoader('./Templates'))
     
     for client_mod in context['client-modules']:
         client_path = os.path.join(plugin_source_path, client_mod['client-module-name'])
@@ -184,7 +184,7 @@ def generatePlugingTemplates(context):
     plugin_path = os.path.join(".", tmp_dir, plugin_name)
 
     #jinja env
-    env = Environment(loader=FileSystemLoader('templates'))
+    env = Environment(loader=FileSystemLoader('./Templates'))
 
     for plugin_temp in context['plugin-templates']:
         plugin_dst = os.path.join(plugin_path, plugin_temp['path'](context['plugin-name']))
@@ -213,7 +213,7 @@ def moveBaseFiles(context):
     shutil.copytree(baseClientModule_src, baseClientModule_dst)
 
     #Need to generate the base build file to have the correct plugin name in it 
-    env = Environment(loader=FileSystemLoader('templates'))
+    env = Environment(loader=FileSystemLoader('./Templates'))
     template = env.get_template("BaseModules/AWSBaseModule.cpp")
     output = template.render(context=context)
 
