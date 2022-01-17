@@ -44,7 +44,7 @@ void* AWSSerializer::NoChange(void* in) {
 
 Aws::String* AWSSerializer::PFStoPAS(FString* s) {
 	char* tmp = new char[s->GetAllocatedSize()];
-	strcpy(tmp, TCHAR_TO_UTF8(**s));
+	strcpy_s(tmp, s->GetAllocatedSize(), TCHAR_TO_UTF8(**s));
 	auto rv = new Aws::String(tmp);
 
 	return rv;
